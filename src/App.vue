@@ -1,30 +1,25 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { provide } from 'vue'
+import { provideState } from './state'
+import './style.css'
+
+const state = provideState()
+provide('state', state)
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-</template>
+  <div class="m-10">
+  <p class="mb-4">
+    <strong class="font-semibold">Current route path:</strong> {{ $route.fullPath }}
+  </p>
+  <nav class="mb-4">
+    <RouterLink class="text-blue-500 hover:text-blue-700 mr-4" to="/home">Go to Home</RouterLink>
+    <RouterLink class="text-blue-500 hover:text-blue-700 mr-4" to="/create">Go to Create</RouterLink>
+    <RouterLink class="text-blue-500 hover:text-blue-700" to="/project">Go to Project</RouterLink>
+  </nav>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+  <main>
+    <RouterView />
+  </main>
+</div>
+</template>
