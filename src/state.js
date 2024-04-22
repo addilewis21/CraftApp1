@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive, provide } from 'vue'
 
 export const state = reactive({
   link: '',
@@ -6,3 +6,8 @@ export const state = reactive({
   projectName: '',
   craftType: '',
 })
+
+export function provideState() {
+  // use Vue's provide function to provide the state
+  provide('state', state);
+}

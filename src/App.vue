@@ -1,16 +1,20 @@
 <script setup>
-import { provide } from 'vue'
+import { provide, toRefs } from 'vue'
 import { provideState } from './state'
+import { useRoute } from 'vue-router'
 import './style.css'
 
 const state = provideState()
 provide('state', state)
+
+
+const route = toRefs(useRoute())
 </script>
 
 <template>
   <div class="m-10">
   <p class="mb-4">
-    <strong class="font-semibold">Current route path:</strong> {{ $route.fullPath }}
+    <strong class="font-semibold">Current route path:</strong> {{ route.fullPath }}
   </p>
   <nav class="mb-4">
     <RouterLink class="text-blue-500 hover:text-blue-700 mr-4" to="/home">Go to Home</RouterLink>
