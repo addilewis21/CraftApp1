@@ -1,15 +1,15 @@
 <template>
-  <div class="flex flex-col items-center justify-center bg-gray-100">
-    <h2 class="text-2xl font-bold mb-4">Stopwatch: {{ formattedTime }}</h2>
+  <div class="flex flex-col items-center justify-center bg-[#B1BA7D]">
+    <h2 class="text-2xl font-bold mb-4 mt-10">Stopwatch: {{ formattedTime }}</h2>
     <div class="flex space-x-4 mb-6">
-      <button @click="startStop" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">{{ running ? 'Stop' : 'Start' }}</button>
-      <button @click="reset" :disabled="!time" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">Reset</button>
-      <button @click="lap" :disabled="!running" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">Lap</button>
+      <button @click="startStop" class="px-4 py-2 bg-[#7D842A] text-white rounded hover:bg-[#4E5410]">{{ running ? 'Stop' : 'Start' }}</button>
+      <button @click="reset" :disabled="!time" class="px-4 py-2 bg-[#E55439] text-white rounded hover:bg-[#AF3B25]">Reset</button>
+      <button @click="lap" :disabled="!running" class="px-4 py-2 bg-[#F19763] text-white rounded hover:bg-[#D06F37]">Lap</button>
     </div>
     <h2 class="text-xl font-bold mb-2">Laps:</h2>
-    <ul class="list-decimal list-inside">
-    <li v-for="(lap, index) in laps" :key="index" class="mb-1">{{ lap.time }} - {{ lap.date }}</li>
-  </ul>
+    <ul class="list-decimal list-inside p-8  text-center mb-10">
+      <li v-for="(lap, index) in laps" :key="index" class="mb-1 text-xl" :class="{ 'bg-[#FAAE82] p-3': index % 2 === 0, 'bg-[#F17861] p-3': index % 2 !== 0 }">{{ lap.time }} - {{ lap.date }}</li>
+    </ul>
   </div>
 </template>
 
