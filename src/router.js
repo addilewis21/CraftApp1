@@ -8,9 +8,14 @@ const routes = [
   { path: '/', redirect: '/Home' },
   { path: '/Home', component: HomeView },
   { path: '/Create', component: CreateView },
-  { path: '/Project/:id', component: ProjectView, name: 'Project', props: route => ({ ...route.params }) }, 
+  { path: '/project', component: ProjectView },
+  { 
+    path: '/Project/:id/:craftType/:patternName/:image/:projectId', 
+    component: ProjectView, 
+    name: 'Project', 
+    props: route => ({ ...route.params }) 
+  }, 
 ]
-
 const router = createRouter({
   history: createMemoryHistory(),
   routes,
