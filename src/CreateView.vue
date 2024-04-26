@@ -3,7 +3,7 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const state = reactive({ projectName: '', craftType: '', image: '', projectType: '', patternName: '' })
+const state = reactive({ projectId: '', craftType: '', image: '', patternName: '' })
 
 const onFileChange = (e) => {
   const file = e.target.files[0]
@@ -17,23 +17,17 @@ const onFileChange = (e) => {
 }
 
 const saveForm = () => {
-
   router.push({ 
-    name: 'Project', 
-    params: { 
-      id: state.projectId, 
-      patternName: state.patternName, 
-      craftType: state.craftType, 
-      ...state 
-    } 
+    name: 'ProjectDetails', 
+    params: { id: state.projectId, ...state } 
   })
 }
 </script>
 
 <template>
   <div class="flex flex-col items-center bg-[#F3D3BE] p-10">
-  <form @submit.prevent="saveForm">
     <h2 class="text-2xl font-bold mb-4">CreateView</h2>
+    <form @submit.prevent="saveForm">
 
     <h2 for="projectId" class="my-2">Project Name:</h2>
     <input id="projectId" type="text" v-model="state.projectId" class="border border-gray-300 p-2 w-full mt-2">

@@ -14,7 +14,10 @@
 </template>
 
 <script setup>
-import { ref, watch, onUnmounted, computed } from 'vue'
+import { ref, watch, onUnmounted, computed, withDefaults, defineProps, defineEmits } from 'vue'
+
+const props = withDefaults(defineProps(), {})
+const emit = defineEmits(['update'])
 
 let intervalId = null
 const running = ref(false)
@@ -53,6 +56,7 @@ watch(running, (newVal) => {
 
 onUnmounted(() => {
   clearInterval(intervalId)
+  emit('update', { time: time.value, laps: laps.value })
 })
 
 const formatTime = (time) => {

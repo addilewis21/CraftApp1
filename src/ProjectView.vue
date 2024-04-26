@@ -1,9 +1,11 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import Counter from './components/Counter1.vue'
 import Timer from './components/Timer.vue'
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
+
+const count1 = ref(null)
 
 const props = defineProps({
   id: String,
@@ -14,11 +16,11 @@ const props = defineProps({
 })
 
 const route = useRoute()
-const id = route.params.id
+const id = ref(route.params.id)
 const form = ref(route.params)
-const patternName = route.params.patternName
-const craftType = route.params.craftType 
-const image = route.params.image
+const patternName = ref(route.params.patternName)
+const craftType = ref(route.params.craftType)
+const image = ref(route.params.image)
 
 const share = () => {
   if (navigator.share) {
@@ -35,23 +37,59 @@ const share = () => {
 
 const store = useStore()
 
+onBeforeUnmount(() => {
+  store.dispatch('saveCounterAmounts', { projectId: id.value, counterAmounts: counter1.value })
+  // Replace counter2.value with your actual timer reference
+  store.dispatch('saveTimerWithLaps', { projectId: id.value, timerWithLaps: counter2.value })
+})
+
+const counter1 = ref(null)
+const counter2 = ref(null)
+
 const saveProject = () => {
   const project = {
     id: id.value,
-    craftType: craftType.value,
     patternName: patternName.value,
+    craftType: craftType.value,
     image: image.value,
+    counterAmounts: store.state.counterAmounts[id.value],
+    timerWithLaps: store.state.timerWithLaps[id.value],
+  };
+
+  if (counter1.value) {
+    store.dispatch('saveCounterAmounts', { projectId: id.value, counterAmounts: counter1.value.count })
   }
 
   console.log(project) // Print the project details to the console
+  
+  store.dispatch('addProject', project);
+};
 
-  store.commit('addProject', project)
-}
-
+const editMode = ref(false)
 
 </script>
 
 <template>
+  <div class="flex justify-end right-0 p-4">
+  <button @click="editMode = !editMode" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-4 px-6 rounded mt-4 mx-2 text-2xl">{{ editMode ? 'Save' : 'Edit' }}</button>
+  </div>
+  <div class="m-auto ">
+  <img class="m-auto p-4 w-1/4 " :src="image" alt="Project image" /> 
+  <div v-if="editMode">
+    <input v-model="image.value" type="text" placeholder="Image URL">
+  </div>
+  <div class="text-center bg-[#E55439] p-2 text-white w-1/2 m-auto">
+    <h3 class="text-3xl font-semibold" v-if="id && !editMode">{{ id }}</h3> 
+    <div v-if="editMode">
+      <input v-model="id.value" type="text" placeholder="ID">
+    </div>
+    <p v-if="!editMode">{{ craftType?.toUpperCase() }}</p> 
+    <div v-if="editMode">
+      <input v-model="craftType.value" type="text" placeholder="Craft Type">
+    </div>
+  </div>
+</div>
+
 <div class="bg-[#F3D3BE]">
 
   <div class="flex justify-end right-0 p-4">
@@ -63,7 +101,7 @@ const saveProject = () => {
     <img class="m-auto p-4 w-1/4 " :src="image" alt="Project image" /> 
     <div class="text-center bg-[#E55439] p-2 text-white w-1/2 m-auto">
       <h3 class="text-3xl font-semibold" v-if="id">{{ id }}</h3> 
-      <p>{{ craftType.toUpperCase() }}</p> 
+      <p>{{ craftType?.toUpperCase() }}</p> 
     </div>
   </div>
 
@@ -74,12 +112,12 @@ const saveProject = () => {
 
   <div class="text-center my-4 bg-[#F19763] p-3 w-1/4 m-auto">
     <h2 class="text-lg">Stitch Counter</h2>
-    <Counter class="m-auto text-2xl" />
+    <Counter ref="counter1" class="m-auto text-2xl" />
   </div>
 
   <div class="text-center my-4 bg-[#F19763] p-3 w-1/4 m-auto">
     <h2 class="text-lg">Row Counter</h2>
-    <Counter class="m-auto text-2xl" />
+    <Counter ref="counter2" class="m-auto text-2xl" />
   </div>
 
   <Timer />
