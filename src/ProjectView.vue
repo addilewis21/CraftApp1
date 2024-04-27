@@ -85,19 +85,22 @@ const editMode = ref(false)
   <div class="text-center bg-[#E55439] p-2 text-white w-1/2 m-auto">
     <h3 class="text-3xl font-semibold" v-if="id && !editMode">{{ id }}</h3> 
     <div v-if="editMode">
-      <input v-model="id.value" type="text" placeholder="ID">
-    </div>
+  <input v-model="id" type="text" placeholder="ID" class="text-black !important">
+</div>
     <p v-if="!editMode">{{ craftType?.toUpperCase() }}</p> 
     <div v-if="editMode">
-      <input v-model="craftType.value" type="text" placeholder="Craft Type">
-    </div>
+  <input v-model="craftType" type="text" placeholder="Craft Type" class="text-black !important">
+</div>
   </div>
 </div>
   </div>
 
-<div class="flex items-center space-x-2 justify-center my-4 ">
+  <div class="flex items-center space-x-2 justify-center my-4 ">
   <h2 class="text-xl">Link to pattern:</h2>
-  <p class="px-2 py-1 border-2 border-[#E55439] bg-[#FCEEE5]">{{ patternName }}</p>
+  <p v-if="!editMode" class="px-2 py-1 border-2 border-[#E55439] bg-[#FCEEE5]">{{ patternName }}</p>
+  <div v-if="editMode">
+  <input v-model="patternName" type="text" placeholder="Pattern Name" class="text-black !important">
+</div>
 </div>
 
   <div class="text-center my-4 bg-[#F19763] p-3 w-1/4 m-auto">
