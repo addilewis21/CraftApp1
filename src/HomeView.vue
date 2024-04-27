@@ -8,6 +8,7 @@ const router = useRouter()
 const projects = computed(() => store.state.projects)
 
 const selectProject = (project) => {
+  console.log(router);
   router.push({ name: 'ProjectView', params: { id: project.id } })
 }
 

@@ -7,8 +7,7 @@ const routes = [
   { path: '/', redirect: '/Home' },
   { path: '/Home', component: HomeView },
   { path: '/Create', component: CreateView },
-  { path: '/project', component: ProjectView, name: 'ProjectView' },  // new route
-  { path: '/project/:id', component: ProjectView, name: 'ProjectViewWithId', props: true },
+  { path: '/project/:id', component: ProjectView, name: 'Project', props: true },
   { 
     path: '/:id/:craftType/:patternName/:image/:projectId', 
     component: ProjectView, 

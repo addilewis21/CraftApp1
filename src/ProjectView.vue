@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onBeforeUnmount } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import Counter from './components/Counter1.vue'
 import Timer from './components/Timer.vue'
 import { useStore } from 'vuex';
+
+const router = useRouter()
 
 const count1 = ref(null)
 
@@ -63,7 +65,9 @@ const saveProject = () => {
   console.log(project) // Print the project details to the console
   
   store.dispatch('addProject', project);
-};
+
+  router.push({ name: 'Project', params: { id: id.value } })
+}
 
 const editMode = ref(false)
 
