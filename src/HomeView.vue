@@ -27,7 +27,7 @@ defineExpose({
   <h2 class="text-2xl font-bold mb-4">Home View</h2>
 
   <div class="bg-[#F19763] p-10 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4">
-    <router-link to="/create" class="flex items-center justify-center bg-[#4E5410] rounded-lg h-64 w-64 text-6xl text-white hover:bg-[#7D842A] transition-colors duration-200">
+    <router-link to="/create" class="flex items-center justify-center bg-[#7D842A] rounded-lg h-64 w-64 text-6xl text-white hover:bg-[#7D842A] transition-colors duration-200">
       <div>
         <span class="block text-center ">+</span>
         <span class="block text-center text-2xl">Create</span>
