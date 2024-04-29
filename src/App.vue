@@ -2,6 +2,7 @@
 import { provide, toRefs } from 'vue'
 import { provideState } from './state'
 import { useRoute } from 'vue-router'
+
 import './style.css'
 
 const state = provideState()
