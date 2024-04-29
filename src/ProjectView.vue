@@ -4,49 +4,52 @@ import { useRoute, useRouter } from 'vue-router'
 import Counter from './components/Counter1.vue'
 import Timer from './components/Timer.vue'
 import { useStore } from 'vuex';
+import html2canvas from 'html2canvas';
 
 const router = useRouter()
-
-const count1 = ref(null)
-
-const props = defineProps({
-  id: String,
-  craftType: String,
-  patternName: String,
-  image: String,
-  projectId: String,
-})
-
 const route = useRoute()
+const store = useStore()
+
 const id = ref(route.params.id)
 const form = ref(route.params)
 const patternName = ref(route.params.patternName)
 const craftType = ref(route.params.craftType)
 const image = ref(route.params.image)
 
-const share = () => {
+const counter1 = ref(null)
+const counter2 = ref(null)
+
+const editMode = ref(false)
+
+function isValidURL(string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;  
+  }
+}
+
+const share = async () => {
   if (navigator.share) {
-    navigator.share({
-      title: 'Check out this project!',
-      text: 'Here is an image from my project:',
-      url: image.value,
-    })
-    .catch((error) => console.log('Error sharing', error));
+    try {
+      await navigator.share({
+        title: 'Check out this project!',
+        text: 'Here is a screenshot from my project:',
+        url: window.location.href,
+      });
+    } catch (error) {
+      console.log('Error sharing', error);
+    }
   } else {
     console.log('Web Share API is not supported in your browser.');
   }
 }
 
-const store = useStore()
-
 onBeforeUnmount(() => {
   store.dispatch('saveCounterAmounts', { projectId: id.value, counterAmounts: counter1.value })
-  // Replace counter2.value with your actual timer reference
   store.dispatch('saveTimerWithLaps', { projectId: id.value, timerWithLaps: counter2.value })
 })
-
-const counter1 = ref(null)
-const counter2 = ref(null)
 
 const saveProject = () => {
   const project = {
@@ -62,15 +65,14 @@ const saveProject = () => {
     store.dispatch('saveCounterAmounts', { projectId: id.value, counterAmounts: counter1.value.count })
   }
 
-  console.log(project) // Print the project details to the console
-  
-  store.dispatch('addProject', project);
+  if (store.state.projects.find(project => project.id === id.value)) {
+    store.dispatch('updateProject', project);
+  } else {
+    store.dispatch('addProject', project);
+  }
 
   router.push({ name: 'Project', params: { id: id.value } })
 }
-
-const editMode = ref(false)
-
 </script>
 
 <template>
@@ -78,11 +80,18 @@ const editMode = ref(false)
 <div class="bg-[#F3D3BE]">
 
   <div class="flex justify-end right-0 p-4">
+
+    <div class="flex justify-between p-4">
+        <router-link to="/" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-4 px-6 rounded text-2xl">
+            <h2>&#x2770; Home</h2>
+        </router-link>
+      </div>
+  <div class="flex space-x-4">
     <button @click="saveProject" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-4 px-6 rounded mt-4 mx-2 text-2xl">Save</button>
     <button @click="share" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-4 px-6 rounded mt-4 mx-2 text-2xl">Share</button>
     <button @click="editMode = !editMode" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-4 px-6 rounded mt-4 mx-2 text-2xl">{{ editMode ? 'Save Changes' : 'Edit' }}</button>
   </div>
-
+</div>
   <div class="m-auto ">
     <div class="m-auto ">
   <img class="m-auto p-4 w-1/4 " :src="image" alt="Project image" /> 
