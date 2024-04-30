@@ -89,16 +89,16 @@ const saveProject = () => {
 
   <div class="flex justify-end right-0 p-4">
 
-    <div class="flex justify-between p-4">
-        <router-link to="/" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-4 px-6 rounded text-2xl">
-            <h2>&#x2770; Home</h2>
-        </router-link>
-      </div>
-  <div class="flex space-x-4">
-    <button @click="saveProject" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-4 px-6 rounded mt-4 mx-2 text-2xl">Save</button>
-    <button @click="share" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-4 px-6 rounded mt-4 mx-2 text-2xl">Share</button>
-    <button @click="editMode = !editMode" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-4 px-6 rounded mt-4 mx-2 text-2xl">{{ editMode ? 'Save Changes' : 'Edit' }}</button>
-  </div>
+    <div class="flex flex-col space-y-4 justify-end right-0 p-4 md:flex-row md:space-y-0 md:space-x-6 md:items-end">
+      <router-link to="/" class="flex items-center bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-2 px-4 rounded mt-2 mx-2 text-xl md:mx-0 md:mb-2 md:w-full">
+        <span>&#x2770;</span>
+        <h2 class="ml-2">Home</h2>
+      </router-link>
+      <button @click="saveProject" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-2 px-4 rounded mt-2 mx-2 text-xl md:mx-0 md:mb-2 md:w-full">Save</button>
+      <button @click="share" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-2 px-4 rounded mt-2 mx-2 text-xl md:mx-0 md:mb-2 md:w-full">Share</button>
+      <button @click="editMode = !editMode" class="bg-[#B1BA7D] text-black hover:bg-[#7D842A] hover:text-white font-bold py-2 px-4 rounded mt-2 mx-2 text-xl md:mx-0 md:mb-2 md:w-full">{{ editMode ? 'Save Changes' : 'Edit' }}</button> 
+</div>
+
 </div>
   <div class="m-auto ">
     <div class="m-auto ">
