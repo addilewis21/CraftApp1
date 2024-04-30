@@ -30,6 +30,11 @@ function isValidURL(string) {
   }
 }
 
+const onFileChange = (e) => {
+    const file = e.target.files[0];
+    image.value = URL.createObjectURL(file);
+  }
+
 const share = async () => {
   if (navigator.share) {
     try {
@@ -100,21 +105,26 @@ const saveProject = () => {
 </div>
 
 </div>
+<div class="m-auto ">
   <div class="m-auto ">
-    <div class="m-auto ">
-  <img class="m-auto p-4 w-1/4 " :src="image" alt="Project image" /> 
-  <div class="text-center bg-[#E55439] p-2 text-white w-1/2 m-auto">
-    <h3 class="text-3xl font-semibold" v-if="id && !editMode">{{ id }}</h3> 
-    <div v-if="editMode">
-  <input v-model="id" type="text" placeholder="ID" class="text-black !important">
-</div>
-    <p v-if="!editMode">{{ craftType?.toUpperCase() }}</p> 
-    <div v-if="editMode">
-  <input v-model="craftType" type="text" placeholder="Craft Type" class="text-black !important">
-</div>
+    <div v-if="!editMode">
+      <img class="m-auto p-4 w-1/4 " :src="image" alt="Project image" /> 
+    </div>
+    <div v-else class="flex justify-center items-center">
+      <input type="file" @change="onFileChange" class="text-black !important">
+    </div>
+    <div class="text-center bg-[#E55439] p-2 text-white w-1/2 m-auto mt-10">
+      <h3 class="text-3xl font-semibold" v-if="id && !editMode">{{ id }}</h3> 
+      <div v-if="editMode">
+        <input v-model="id" type="text" placeholder="ID" class="text-black !important">
+      </div>
+      <p v-if="!editMode">{{ craftType?.toUpperCase() }}</p> 
+      <div v-if="editMode">
+        <input v-model="craftType" type="text" placeholder="Craft Type" class="text-black !important">
+      </div>
+    </div>
   </div>
 </div>
-  </div>
 
   <div class="flex items-center space-x-2 justify-center my-4 ">
   <h2 class="text-xl">Link to pattern:</h2>
