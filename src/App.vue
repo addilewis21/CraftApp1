@@ -18,9 +18,9 @@ const route = toRefs(useRoute())
     <strong class="font-semibold">Current route path: ??</strong> {{ route.fullPath }}
   </p>
 
-  <main>
+  <!--<main>-->
     <RouterView />
-  </main>
+  <!--</main>-->
 </div>
 
 </template>
