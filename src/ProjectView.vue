@@ -33,11 +33,19 @@ function isValidURL(string) {
 const share = async () => {
   if (navigator.share) {
     try {
-      await navigator.share({
+      const data = {
         title: 'Check out this project!',
         text: 'Here is a screenshot from my project:',
         url: window.location.href,
-      });
+      };
+
+      // Check if the data is too large
+      if (new Blob([JSON.stringify(data)]).size > navigator.maxShareSize) {
+        console.log('Data is too large to share.');
+        return;
+      }
+
+      await navigator.share(data);
     } catch (error) {
       console.log('Error sharing', error);
     }
@@ -47,8 +55,8 @@ const share = async () => {
 }
 
 onBeforeUnmount(() => {
-  store.dispatch('saveCounterAmounts', { projectId: id.value, counterAmounts: counter1.value })
-  store.dispatch('saveTimerWithLaps', { projectId: id.value, timerWithLaps: counter2.value })
+  store.dispatch('saveCounterAmounts', { projectId: id.value, counterAmounts: counter1.value.count })
+  store.dispatch('saveTimerWithLaps', { projectId: id.value, timerWithLaps: counter2.value.count })
 })
 
 const saveProject = () => {
