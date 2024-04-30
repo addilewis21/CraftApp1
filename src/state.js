@@ -8,6 +8,5 @@ export const state = reactive({
 })
 
 export function provideState() {
-  // use Vue's provide function to provide the state
   provide('state', state);
 }

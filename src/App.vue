@@ -15,12 +15,11 @@ const route = toRefs(useRoute())
 <template>
   <div class="p-10 bg-[#F19763] w-full ">
   <p class="mb-4">
-    <strong class="font-semibold">Current route path: ??</strong> {{ route.fullPath }}
+    <strong class="font-semibold">Current route path: </strong> {{ route.fullPath }}
   </p>
 
-  <!--<main>-->
     <RouterView />
-  <!--</main>-->
+
 </div>
 
 </template>
