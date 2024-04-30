@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [vue()],
-  base: './', // base public path when served in production
+  base: '/CraftApp1/', // base public path when served in production
   build: {
     outDir: 'dist', // specify the output directory
     rollupOptions: {
