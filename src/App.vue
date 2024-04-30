@@ -2,6 +2,7 @@
 import { provide, toRefs } from 'vue'
 import { provideState } from './state'
 import { useRoute } from 'vue-router'
+import { RouterView } from 'vue-router'
 
 import './style.css'
 
@@ -16,7 +17,6 @@ const route = toRefs(useRoute())
   <div class="p-10 bg-[#F19763] w-full ">
   <p class="mb-4">
     <strong class="font-semibold">Current route path: ??</strong> {{ route.fullPath }}
-    <RouterView />
   </p>
 
   <main>
