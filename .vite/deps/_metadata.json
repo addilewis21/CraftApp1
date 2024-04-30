@@ -1,8 +1,40 @@
 {
-  "hash": "0b2e1203",
+  "hash": "8b24e7aa",
   "configHash": "865dfa01",
-  "lockfileHash": "e3b0c442",
-  "browserHash": "69e0a43e",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "c9aa6948",
+  "browserHash": "4638a845",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "481850d5",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "587d0207",
+      "needsInterop": false
+    },
+    "vuex": {
+      "src": "../../node_modules/vuex/dist/vuex.esm-bundler.js",
+      "file": "vuex.js",
+      "fileHash": "e8aa628c",
+      "needsInterop": false
+    },
+    "vuex-persistedstate": {
+      "src": "../../node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js",
+      "file": "vuex-persistedstate.js",
+      "fileHash": "f6cc9560",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-AYVSL3LM": {
+      "file": "chunk-AYVSL3LM.js"
+    },
+    "chunk-5A4OAFVX": {
+      "file": "chunk-5A4OAFVX.js"
+    }
+  }
 }

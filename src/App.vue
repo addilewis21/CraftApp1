@@ -2,7 +2,6 @@
 import { provide, toRefs } from 'vue'
 import { provideState } from './state'
 import { useRoute } from 'vue-router'
-import { RouterView } from 'vue-router'
 
 import './style.css'
 
@@ -23,4 +22,5 @@ const route = toRefs(useRoute())
     <RouterView />
   </main>
 </div>
+
 </template>
